@@ -1,9 +1,12 @@
 Plex Media Server
 -----------------
+Plex website: (http://www.plexapp.com)
 This module will install the Plex media server and create a backup cron of the PMS Library.
 This module works on Ubuntu, Centos, Redhat, Fedora and Scientific.
 
+
 ###Plex Media Server Control Panel
+Once the module has been applied, you should be able to browse to the following url
 http://hostname:32400/manage
 
 ### Basic Usage

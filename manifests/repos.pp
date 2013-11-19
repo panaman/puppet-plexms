@@ -9,15 +9,16 @@ class plexms::repos {
         descr    => 'PlexRepo',
       }
     }
-    'Ubuntu': {
-      tps::report { '/etc/apt/sources.list.d/plex.list':
-        flare => 'deb http://plex.r.worldssl.net/PlexMediaServer/ubuntu-repo lucid main',
-      }
+    'Debian','Ubuntu': {
       apt::key { 'plex':
         key        => 'E533491A',
         key_source => 'http://plexapp.com/plex_pub_key.pub',
-        require    => File['/etc/apt/sources.list.d/plex.list'],
-        before     => Package['plexmediaserver'],
+      } ->
+      apt::source { 'plex':
+        location    => 'http://plex.r.worldssl.net/PlexMediaServer/ubuntu-repo',
+        release     => 'lucid',
+        include_src => false,
+        before      => Package['plexmediaserver'],
       }
     }
   }

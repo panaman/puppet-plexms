@@ -11,4 +11,21 @@ class plexms::params {
   }
   $pkg_ensure = 'latest'
   $svc_ensure = 'running'
+  $url        = 'UNSET'
+  $file_type = $osfamily ? {
+    'Debian' => '.deb',
+    default  => '.rpm',
+  }
+  $repo_file = $osfamily ? {
+    'Debian' => '/etc/apt/sources.list.d/plex.list',
+    default  => '/etc/yum.repos.d/PlexRepo.repo',
+  }
+  $update_repo = $osfamily ? {
+    'Debian' => 'apt-get update',
+    default  => 'yum clean all',
+  }
+  $pkg_provider = $osfamily ? {
+    'Debian' => 'dpkg',
+    default  => 'rpm',
+  }
 }

@@ -1,4 +1,9 @@
-class plexms::repos {
+class plexms::repos (
+  $pkg_ensure = $plexms::pkg_ensure,
+  ) inherits plexms {
+  package { 'plexmediaserver':
+    ensure  => $pkg_ensure,
+  }
   case $operatingsystem {
     'RedHat','Fedora','CentOS','Scientific': {
       yumrepo { 'PlexRepo':
@@ -7,6 +12,7 @@ class plexms::repos {
         gpgcheck => '1',
         gpgkey   => 'http://plexapp.com/plex_pub_key.pub',
         descr    => 'PlexRepo',
+        before   => Package['plexmediaserver'],
       }
     }
     'Debian','Ubuntu': {
